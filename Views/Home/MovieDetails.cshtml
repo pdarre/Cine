@@ -1,0 +1,141 @@
+﻿@*@{
+        ViewBag.Title = "GetMovie";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        var movie = ViewData["movie"] as Cine.Models.Movie;
+        var movieDetail = movie.movieDetail.FirstOrDefault();
+        var lista = (from t in movie.Cast select t).Take(5).ToList();
+        String coma = ",  ";
+        DateTimeOffset date = (DateTimeOffset)movieDetail.ReleaseDate;
+    }
+    <style>
+        .tarjeta {
+            height: 200px;
+        }
+    </style>
+    <div class="row">
+        <div class="col l3 left-align">
+            <img class="responsive-img tarjeta z-depth-2" src="http://image.tmdb.org/t/p/w342/@movieDetail.PosterPath">
+        </div>
+        <div class="col l9 right">
+            <table class="striped left-align">
+                <tr>
+                    <td>
+                        Title:
+                    </td>
+                    <td>
+                        @movieDetail.Title
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        IMDB:
+                    </td>
+                    <td>
+                        @movieDetail.VoteAverage
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Overview:
+                    </td>
+                    <td>
+                        @movieDetail.Overview
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Release date:
+                    </td>
+                    <td>
+                        @date.Day/@date.Month/@date.Year
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Cast:
+                    </td>
+                    <td>
+                        @foreach (var item in lista)
+                        {
+                            @item.Name
+                            if (!item.Equals(lista.Last()))
+                            {
+                                @coma
+                            }
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>*@
+
+@using Cine.Models;
+
+@{
+    ViewBag.Title = "GetMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var movie = ViewData["movie"] as Cine.Models.Movie;
+    var movieDetail = movie.movieDetail.FirstOrDefault();
+    var lista = (from t in movie.Cast select t).Take(5).ToList();
+    String coma = ",  ";
+    DateTimeOffset date = (DateTimeOffset)movieDetail.ReleaseDate;
+}
+<h4>@movieDetail.Title</h4>
+<style>
+    .td-text {
+        text-shadow: 0px 0px #ff0000;
+    }
+</style>
+<div class="row">
+    <div class="col l3 left-align">
+        <img class="z-depth-3" height="500" src="http://image.tmdb.org/t/p/w780/@movieDetail.PosterPath" />
+    </div>
+    <div class="col l8 right">
+        <table class="striped left-align">
+            <tr>
+                <td>
+                    Title:
+                </td>
+                <td>
+                    @movieDetail.Title
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    IMDB:
+                </td>
+                <td>
+                    @movieDetail.VoteAverage
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Overview:
+                </td>
+                <td>
+                    @movieDetail.Overview
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cast
+                </td>
+                <td class="td-text">
+                    @foreach (var item in lista)
+                    {
+                        <span>@item.Character - @item.Name</span>
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Homepage:
+                </td>
+                <td>
+                    @*<a href="@movie.Homepage" target="_blank">@movie.Title</a>*@
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

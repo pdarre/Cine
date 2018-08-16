@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Ahora en cines</h2>
+
+<style>
+    .card-small {
+        width: 250px;
+        font-size: 11px;
+    }
+</style>
+<div class="row">
+    @foreach (var item in Model.movieDetail)
+    {
+        <div class="col l3">
+            <div class="card card-small center-align materialboxed">
+                <div class="card-image">
+                    <a href="/Home/getMovieById?id=@item.Id">
+                        <img src="http://image.tmdb.org/t/p/w500/@item.PosterPath" class="responsive-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

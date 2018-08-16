@@ -1,0 +1,31 @@
+﻿@using Cine.Models;
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var movie = ViewData["movie"] as Cine.Models.Movie;
+}
+
+<h2>Results</h2>
+
+<table class="table">
+    @if (@movie.movieDetail.Count().Equals(0))
+    {
+        <tr>
+            <td>
+                <span>Must enter a search query</span>
+            </td>
+        </tr>
+    }
+    @foreach (var item in movie.movieDetail)
+    {
+        <tr>
+            <td>
+                <a href="/Home/getMovieById?id=@item.Id">@item.OriginalTitle</a>
+            </td>
+            <td>
+                <img src="http://image.tmdb.org/t/p/w185/@item.PosterPath" />
+            </td>
+        </tr>
+    }
+</table>

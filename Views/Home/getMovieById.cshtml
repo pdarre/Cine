@@ -1,0 +1,70 @@
+﻿@model Cine.Models.MovieById
+@using Cine.Models;
+
+@{
+    ViewBag.Title = "getMovieById";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mov = ViewData["movie"] as Movie;
+    var lista = (from t in mov.Cast select t).Take(5).ToList();
+    var movie = mov.movieById;
+
+}
+<h4>@movie.Title</h4>
+<style>
+    .td-text {
+        text-shadow: 0px 0px #ff0000;
+    }
+</style>
+<div class="row">
+    <div class="col l3 left-align">
+        <img class="z-depth-3" height="500" src="http://image.tmdb.org/t/p/w780/@movie.PosterPath" />
+    </div>
+    <div class="col l8 right">
+        <table class="striped left-align">
+            <tr>
+                <td>
+                    Title:
+                </td>
+                <td>
+                    @movie.Title
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    IMDB:
+                </td>
+                <td>
+                    @movie.VoteAverage
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Overview:
+                </td>
+                <td>
+                    @movie.Overview
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cast
+                </td>
+                <td class="td-text">
+                    @foreach (var item in lista)
+                    {
+                        <span>@item.Character - @item.Name</span>
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Homepage:
+                </td>
+                <td>
+                    <a href="@movie.Homepage" target="_blank">@movie.Title</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
