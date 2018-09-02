@@ -1,29 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Net;
-using System.Runtime.Serialization;
-using System.Web;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Cine.Models;
+﻿using Cine.Models;
+using System;
 using System.Web.Mvc;
 
 namespace Cine.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        MovieManteinance mm = new MovieManteinance();
+
         public ActionResult Index()
         {
-            MovieManteinance mm = new MovieManteinance();
-            Movie movie = mm.getNowOnCinema();
-            return View(movie);
+            return View(mm.getNowOnCinema());
         }
 
         public ActionResult MovieDetails(String title)

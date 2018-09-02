@@ -78,7 +78,6 @@ namespace Cine.Models
             m.Crew = this.getCrew(id);
             var movieDetailId = jsonRes.Id;
             return m;
-            //return jsonRes;
         }
     }
 }
